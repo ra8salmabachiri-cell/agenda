@@ -1,0 +1,218 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Mi Mundo · Agenda, Juego y Web</title>
+<style>
+:root{--bg:#f7f1fb;--card:#ffffff;--tx:#2f2740;--mut:#8a7f9c;--ln:#ece3f3;--acc:#7c5cff;--sh:0 10px 30px rgba(92,60,150,.16);--bar:#ffffffd9;color-scheme:light}
+:root[data-theme=dark]{--bg:#17131f;--card:#241e31;--tx:#f3ecfb;--mut:#a99cc0;--ln:#352c45;--acc:#a58bff;--sh:0 10px 30px rgba(0,0,0,.45);--bar:#241e31e6;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%}
+body{font-family:'Quicksand',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--tx);background:radial-gradient(circle at 15% 10%,#ffd6e8 0,transparent 40%),radial-gradient(circle at 85% 90%,#c9e3ff 0,transparent 45%),#e9e1f5;overflow:hidden}
+:root[data-theme=dark] body{background:radial-gradient(circle at 15% 10%,#3a2150 0,transparent 40%),radial-gradient(circle at 85% 90%,#1c3552 0,transparent 45%),#0f0c15}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.stage{height:100dvh;display:grid;place-items:center}
+.device{position:relative;width:100%;height:100dvh;padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px);background:var(--bg);display:flex;flex-direction:column;overflow:hidden}
+.sbar{display:none}
+@media(min-width:600px){
+ .device{width:min(430px,92vw);height:min(900px,96dvh);border-radius:46px;border:10px solid #17141d;box-shadow:0 30px 80px rgba(60,30,110,.35),0 0 0 2px #3a3446}
+ .sbar{display:flex;justify-content:space-between;align-items:center;padding:12px 26px 4px;font-size:.8rem;font-weight:700;position:relative;z-index:30}
+ .sbar::before{content:"";position:absolute;left:50%;top:7px;width:96px;height:24px;border-radius:99px;background:#17141d;transform:translateX(-50%)}
+}
+.screens{position:relative;flex:1;min-height:0}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateY(14px) scale(.985);transition:opacity .35s ease,transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s .35s;background:var(--bg)}
+.screen.on{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease,transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s}
+/* splash */
+#s-splash{z-index:40;align-items:center;justify-content:center;text-align:center;background:linear-gradient(160deg,#ff9ec7,#a58bff 55%,#6fb7ff);color:#fff}
+#s-splash .lg{width:112px;height:112px;border-radius:32px;background:#ffffff2e;backdrop-filter:blur(8px);display:grid;place-items:center;font-size:3.4rem;box-shadow:0 20px 50px #0003;animation:pop .9s cubic-bezier(.2,1.4,.4,1) both}
+#s-splash h1{margin:22px 0 4px;font-size:2rem;letter-spacing:.5px;animation:up .8s .25s both}
+#s-splash p{margin:0;opacity:.9;font-weight:600;animation:up .8s .4s both}
+#s-splash .ld{margin-top:34px;width:120px;height:5px;border-radius:9px;background:#ffffff40;overflow:hidden}
+#s-splash .ld i{display:block;height:100%;width:0;background:#fff;border-radius:9px;animation:fill 1.5s .2s forwards}
+@keyframes pop{from{transform:scale(.3) rotate(-20deg);opacity:0}}@keyframes up{from{transform:translateY(16px);opacity:0}}@keyframes fill{to{width:100%}}
+/* home */
+.scroll{flex:1;overflow-y:auto;padding:14px 18px 110px;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.hh{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.hh small{color:var(--mut);font-weight:700;display:block}.hh small::first-letter{text-transform:uppercase}
+.hh h1{margin:2px 0 0;font-size:1.65rem;line-height:1.15}
+.ib{width:44px;height:44px;border-radius:16px;background:var(--card);box-shadow:var(--sh);display:grid;place-items:center;font-size:1.2rem;transition:.2s}
+.ib:active{transform:scale(.92)}
+.cards{display:grid;gap:14px}
+.big{position:relative;overflow:hidden;text-align:left;border-radius:30px;padding:20px;color:#fff;min-height:132px;box-shadow:var(--sh);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;justify-content:flex-end;animation:up .6s both}
+.big:hover{transform:translateY(-3px)}.big:active{transform:scale(.97)}
+.big .em{position:absolute;right:14px;top:6px;font-size:4.6rem;filter:drop-shadow(0 8px 12px #0003);animation:fl 4s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-7px) rotate(5deg)}}
+.mt{margin:6px 0 14px;text-align:center;font-size:1.5rem;letter-spacing:3px}.wl{margin:6px 0 0;color:var(--mut);font-weight:600;font-size:.88rem}.big p{padding-right:84px}.big .sub{font-size:.8rem;opacity:.85;min-height:1em}.big h2{margin:0;font-size:1.45rem}.big p{margin:3px 0 0;opacity:.92;font-weight:600;font-size:.88rem}
+.big .go{margin-top:10px;align-self:flex-start;background:#ffffff38;backdrop-filter:blur(6px);border-radius:99px;padding:6px 14px;font-weight:700;font-size:.82rem}
+.c1{background:linear-gradient(135deg,#ff8fb8,#ff6f9c 50%,#c06bff)}.c2{background:linear-gradient(135deg,#4cc9a0,#3aa0e8 60%,#5b6cff);animation-delay:.08s}.c5{background:linear-gradient(135deg,#0f9d6e,#14b8c4 60%,#4f7cff);animation-delay:.32s}.c4{background:linear-gradient(135deg,#5b6cff,#4f6bed 55%,#18b894);animation-delay:.24s}.c3{background:linear-gradient(135deg,#ffb86b,#ff8a5c 60%,#e8586f);animation-delay:.16s}
+.today{margin-top:18px;background:var(--card);border-radius:26px;padding:16px;box-shadow:var(--sh);animation:up .6s .24s both}
+.today h3{margin:0 0 10px;font-size:1.05rem;display:flex;justify-content:space-between;align-items:center}
+.today h3 button{font-size:.8rem;font-weight:700;color:var(--acc)}
+.row{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border-radius:16px;background:var(--bg);margin-bottom:8px;font-weight:600;font-size:.9rem}
+.row small{display:block;color:var(--mut);font-weight:600}.row .dt{width:10px;height:10px;border-radius:50%;flex:none}
+.row:active{transform:scale(.98)}.emp{color:var(--mut);text-align:center;padding:8px;font-weight:600}
+.qa{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.qa button{padding:12px;border-radius:18px;background:var(--acc);color:#fff;font-weight:700;font-size:.88rem;box-shadow:0 6px 16px #7c5cff44;transition:.2s}.qa button:active{transform:scale(.96)}.qa button.s{background:#ff8fb8;box-shadow:0 6px 16px #ff8fb855}
+/* section top bar */
+.top{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--bar);backdrop-filter:blur(14px);border-bottom:1px solid var(--ln);z-index:5}
+.top h2{flex:1;margin:0;font-size:1.1rem;text-align:center}
+.top button{height:38px;min-width:38px;padding:0 12px;border-radius:14px;background:var(--card);box-shadow:0 3px 10px #7c5cff1f;font-weight:700;font-size:.9rem;transition:.2s}.top button:active{transform:scale(.93)}
+.top .bk{background:var(--acc);color:#fff;font-size:.78rem;box-shadow:0 4px 12px #7c5cff55}.top h2{font-size:.95rem}
+iframe{flex:1;width:100%;border:0;background:var(--bg);min-height:0}
+/* tab bar */
+.tabbar{position:absolute;left:14px;right:14px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;padding:7px;gap:4px;border-radius:28px;background:var(--bar);backdrop-filter:blur(18px);box-shadow:0 12px 34px rgba(80,50,140,.28);border:1px solid var(--ln)}
+.tabbar button{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px 6px;border-radius:21px;color:var(--mut);font-weight:700;font-size:.72rem;transition:.3s}
+.tabbar svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:.3s}
+.tabbar button.on{color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2));box-shadow:0 6px 16px var(--sg)}
+.tabbar button.on svg{transform:translateY(-2px) scale(1.1)}
+.tabbar button:active{transform:scale(.93)}
+#t-agenda{--g1:#ff8fb8;--g2:#c06bff;--sg:#c06bff66}#t-juego{--g1:#4cc9a0;--g2:#5b6cff;--sg:#5b6cff66}#t-irpf{--g1:#5b6cff;--g2:#18b894;--sg:#4f6bed66}#t-fin{--g1:#0f9d6e;--g2:#4f7cff;--sg:#0f9d6e66}#t-web{--g1:#ffb86b;--g2:#e8586f;--sg:#e8586f66}
+.hasbar .top~iframe{margin-bottom:0}
+.sec iframe{padding-bottom:0}
+.sec .pad{height:84px;flex:none;background:var(--bg)}
+#toast{position:absolute;left:50%;bottom:100px;transform:translate(-50%,30px);background:#2f2740;color:#fff;padding:10px 18px;border-radius:99px;font-weight:700;font-size:.85rem;opacity:0;transition:.3s;z-index:60;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important}}
+</style>
+
+<div class="stage"><div class="device" id="dev">
+<div class="sbar"><span id="clk">9:41</span><span>📶 🔋</span></div>
+<div class="screens">
+
+<section class="screen on" id="s-splash" onclick="finishSplash()">
+ <div class="lg">✿</div><h1>Mi Mundo</h1><p>Agenda · Juego · Web</p><div class="ld"><i></i></div>
+</section>
+
+<section class="screen" id="s-home">
+ <div class="scroll">
+  <div class="hh"><div><small id="hDate"></small><h1 id="hHi">Hola</h1><p class="wl">Bienvenida a tu plataforma. Elige a dónde quieres entrar 👇</p></div><button class="ib" id="themeBtn" aria-label="Cambiar tema" onclick="toggleTheme()">🌙</button></div>
+  <h2 class="mt">MENÚ PRINCIPAL</h2>
+  <div class="cards">
+   <button class="big c1" onclick="go('agenda')"><span class="em">📅</span><h2>Mi agenda 📅</h2><p>Tu agenda personal: calendario, tareas, hábitos y más.</p><p id="agSub" class="sub"></p><span class="go">Entrar ›</span></button>
+   <button class="big c2" onclick="go('juego')"><span class="em">🎮</span><h2>Mi juego 🎮</h2><p>MINI CRAFT: construye, explora y colecciona tesoros.</p><p id="juSub" class="sub"></p><span class="go" id="juGo">Entrar ›</span></button>
+   <button class="big c3" onclick="go('web')"><span class="em">🌐</span><h2>Mi página web 🌐</h2><p>TUKUNA · Menys pantalles, més rialles.</p><p class="sub">Con todas sus secciones y tienda</p><span class="go">Entrar ›</span></button>
+   <button class="big c4" onclick="go('irpf')"><span class="em">🧮</span><h2>Calculadora IRPF 🇪🇸</h2><p>Calcula tu IRPF, simula la declaración de Hacienda y compara sueldos.</p><p class="sub">Todo se calcula en tu navegador</p><span class="go">Entrar ›</span></button>
+   <button class="big c5" onclick="go('fin')"><span class="em">💶</span><h2>Mis finanzas 💰</h2><p>Ingressos, despeses, estalvi i objectius.</p><p class="sub">Resum mensual, gràfics i consells</p><span class="go">Entrar ›</span></button>
+  </div>
+  <div class="today"><h3><span>✨ Lo que viene</span><button onclick="go('agenda')">Ver agenda</button></h3><div id="soon"></div>
+   <div class="qa"><button onclick="quick('ev')">＋ Nuevo evento</button><button class="s" onclick="quick('task')">＋ Nueva tarea</button></div>
+  </div>
+ </div>
+</section>
+
+<section class="screen sec" id="s-agenda">
+ <header class="top"><button class="bk" onclick="go('home')">‹ Volver al menú principal</button><h2>📅 Agenda</h2><button onclick="quick('ev')" aria-label="Nuevo evento">＋</button></header>
+ <iframe id="f-agenda" data-src="agenda.html?embed=1" title="Agenda"></iframe><div class="pad"></div>
+</section>
+
+<section class="screen sec" id="s-juego">
+ <header class="top"><button class="bk" onclick="go('home')">‹ Volver al menú principal</button><h2>🎮 Mini Craft</h2><button onclick="reloadF('juego')" aria-label="Reiniciar vista">↻</button></header>
+ <iframe id="f-juego" data-src="juego.html" title="Juego" allow="fullscreen"></iframe><div class="pad"></div>
+</section>
+
+<section class="screen sec" id="s-web">
+ <header class="top"><button class="bk" onclick="go('home')">‹ Volver al menú principal</button><h2>🌐 TUKUNA</h2><button onclick="reloadF('web')" aria-label="Recargar">↻</button></header>
+ <iframe id="f-web" data-src="web.html" title="Página web"></iframe><div class="pad"></div>
+</section>
+
+<section class="screen sec" id="s-irpf">
+ <header class="top"><button class="bk" onclick="go('home')">‹ Volver al menú principal</button><h2>🧮 IRPF</h2><button onclick="reloadF('irpf')" aria-label="Reiniciar calculadora">↻</button></header>
+ <iframe id="f-irpf" data-src="irpf.html" title="Calculadora IRPF"></iframe><div class="pad"></div>
+</section>
+
+<section class="screen sec" id="s-fin">
+ <header class="top"><button class="bk" onclick="go('home')">‹ Volver al menú principal</button><h2>💶 Finances</h2><button onclick="reloadF('fin')" aria-label="Recargar">↻</button></header>
+ <iframe id="f-fin" data-src="finances.html" title="Finances"></iframe><div class="pad"></div>
+</section>
+
+<nav class="tabbar" aria-label="Navegación">
+ <button id="t-agenda" onclick="tab('agenda')"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="3.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/></svg>Agenda</button>
+ <button id="t-juego" onclick="tab('juego')"><svg viewBox="0 0 24 24"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M8 10.5v4M6 12.5h4"/><circle cx="15.5" cy="11.5" r=".6"/><circle cx="17.5" cy="13.5" r=".6"/></svg>Juego</button>
+ <button id="t-web" onclick="tab('web')"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Web</button>
+<button id="t-irpf" onclick="tab('irpf')"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="3"/><path d="M8.5 7.5h7M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></svg>IRPF</button>
+<button id="t-fin" onclick="tab('fin')"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="M8 15l3-4 3 2 4-6"/></svg>Finances</button>
+</nav>
+<div id="toast"></div>
+</div></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const SECS=['agenda','juego','web','irpf','fin'];let cur='splash';
+const pad=n=>String(n).padStart(2,'0'),ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const HEX={pink:'#f9a8c8',lilac:'#c4a8f5',sky:'#9fd0f5',green:'#a8e0bd',cream:'#f5d98f'};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2200)}
+
+/* ---------- navegación ---------- */
+function show(name){
+  $$('.screen').forEach(s=>s.classList.toggle('on',s.id==='s-'+name));
+  $$('.tabbar button').forEach(b=>b.classList.toggle('on',b.id==='t-'+name));
+  // el juego se pausa al salir y se reanuda al volver
+  const fj=$('#f-juego');
+  if(fj.contentWindow&&fj.dataset.loaded){try{fj.contentWindow.postMessage({app:name==='juego'?'show':'hide'},'*')}catch(e){}}
+  if(SECS.includes(name)){const f=$('#f-'+name);if(!f.dataset.loaded){f.src=f.dataset.src;f.dataset.loaded=1;f.onload=()=>{applyThemeTo(f);if(name==='agenda')tidyAgenda(f)}}}
+  if(name==='home')renderHome();
+  cur=name;
+}
+function go(name,push=true){
+  if(name===cur)return;
+  if(push){history.pushState({n:name},'','#'+(name==='home'?'':name))}
+  show(name);
+}
+function tab(name){ if(name===cur){go('home');return} go(name) }
+addEventListener('popstate',()=>{const h=location.hash.slice(1);show(SECS.includes(h)?h:'home')});
+addEventListener('message',e=>{if(e.data&&e.data.app==='home')go('home')});
+function reloadF(n){const f=$('#f-'+n);f.src=f.dataset.src;toast('Vista recargada ✨')}
+
+/* ---------- splash ---------- */
+let splashDone=false;
+function finishSplash(){
+  if(splashDone)return;splashDone=true;
+  history.replaceState({n:'home'},'',location.pathname);show('home');
+}
+setTimeout(finishSplash,1900);
+
+/* ---------- tema ---------- */
+function getTheme(){try{return localStorage.getItem('app-theme')}catch(e){return null}}
+function curTheme(){return getTheme()||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}
+function applyThemeTo(f){try{f.contentDocument.documentElement.dataset.theme=curTheme()}catch(e){}}
+function applyTheme(){const t=curTheme();document.documentElement.dataset.theme=t;$('#themeBtn').textContent=t==='dark'?'☀️':'🌙';
+  $$('iframe').forEach(applyThemeTo)}
+function toggleTheme(){try{localStorage.setItem('app-theme',curTheme()==='dark'?'light':'dark')}catch(e){}applyTheme()}
+
+/* dentro de la app, la agenda no necesita su propia pestaña de juegos */
+function tidyAgenda(f){try{const d=f.contentDocument,w=f.contentWindow;
+  const st=d.createElement('style');st.textContent='#nav button:last-child:nth-child(8){display:none!important}';d.head.appendChild(st);
+  if(w.tab==='jue')w.setTab('cal')}catch(e){}}
+/* ---------- inicio: datos reales de la agenda ---------- */
+function agendaData(){try{return JSON.parse(localStorage.getItem('agenda-bonita-v1'))||{}}catch(e){return{}}}
+function renderHome(){
+  const now=new Date(),h=now.getHours(),S=agendaData(),T=ymd(now);
+  $('#hHi').textContent=(h<6?'Buenas noches':h<13?'Buenos días':h<21?'Buenas tardes':'Buenas noches')+' ✿';
+  $('#hDate').textContent=now.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
+  const ev=(S.events||[]),hw=(S.hw||[]).filter(x=>!x.done),ex=(S.exams||[]).filter(x=>!x.done&&x.date>=T);
+  const todayEv=ev.filter(e=>e.date===T).length;
+  $('#agSub').textContent=`${todayEv} ${todayEv===1?'evento':'eventos'} hoy · ${hw.length} ${hw.length===1?'tarea':'tareas'} pendientes`;
+  let sv=null;try{sv=JSON.parse(localStorage.getItem('minicraft-v1'))}catch(e){}
+  $('#juSub').textContent=sv?'Tu mundo guardado te espera':'Mundo nuevo listo para explorar';
+  $('#juGo').textContent=sv?'Continuar ›':'Entrar ›';
+  const items=[
+   ...ev.filter(e=>e.date>=T).map(e=>({d:e.date,t:e.title,s:e.time||'Evento',c:HEX[e.color]||HEX.pink})),
+   ...ex.map(e=>({d:e.date,t:'📝 Examen de '+e.subject,s:'Examen',c:HEX.lilac})),
+   ...hw.map(x=>({d:x.due,t:'📚 '+x.subject+(x.desc?' · '+x.desc:''),s:'Tarea',c:HEX.cream}))
+  ].sort((a,b)=>a.d.localeCompare(b.d)).slice(0,4);
+  const lab=d=>d===T?'Hoy':d<T?'Atrasada':new Date(d+'T00:00').toLocaleDateString('es-ES',{weekday:'short',day:'numeric',month:'short'});
+  $('#soon').innerHTML=items.map(i=>`<button class="row" onclick="go('agenda')"><span class="dt" style="background:${i.c}"></span><span style="flex:1;min-width:0">${esc(i.t)}<small>${esc(i.s)} · ${lab(i.d)}</small></span>›</button>`).join('')||'<div class="emp">Todo libre por ahora 🌷<br>Añade un evento o tarea con los botones de abajo.</div>';
+}
+/* acciones rápidas: abren la agenda y su formulario real */
+function quick(kind){
+  go('agenda');const f=$('#f-agenda');
+  const run=()=>{try{kind==='ev'?f.contentWindow.evForm():f.contentWindow.quickTask()}catch(e){toast('Abre la agenda con ＋')}};
+  if(f.contentDocument&&f.contentDocument.readyState==='complete'&&f.contentWindow.evForm)setTimeout(run,380);
+  else f.addEventListener('load',()=>setTimeout(run,300),{once:true});
+}
+/* reloj de la barra de estado y refresco de datos al volver a la pestaña */
+function clk(){$('#clk').textContent=new Date().toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'})}
+setInterval(clk,15000);clk();
+addEventListener('storage',()=>{if(cur==='home')renderHome()});
+applyTheme();renderHome();
+</script>
+</body></html>
